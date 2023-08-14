@@ -2,12 +2,15 @@
 
 This package is a package for converting nested Json/Dictionaries/Lists for DataFrame usage
 
-to download it just clone this project in your dirictory
+for latest release
+```
+pip insyall JsonDF==1.0.3
+```
 
 and to use it : 
 
 ```python
-import JsonDf.src.Data as Data
+import JsonDf.Data as Data
 
 data = Data(prefix="your_prefered_prefix_default_is_root", data=YourJson)
 

@@ -4,7 +4,7 @@ This package is a package for converting nested Json/Dictionaries/Lists for Data
 
 for latest release
 ```
-pip insyall JsonDF==1.0.3
+pip install JsonDF==1.0.3
 ```
 
 and to use it : 

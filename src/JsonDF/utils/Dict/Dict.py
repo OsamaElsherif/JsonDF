@@ -1,4 +1,4 @@
-import JsonDF.src.utils.List.List as l
+import JsonDF.utils.List.List as l
 
 class Dict:
     def __init__ (self, data, prefix):

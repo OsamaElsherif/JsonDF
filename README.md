@@ -29,7 +29,7 @@ In Json type you have the ability to parse Json/Dict in the sameway it parsed in
 
 to use it : 
 
-```
+```python
 from Json.utils.Json import Json
 
 some_json = {

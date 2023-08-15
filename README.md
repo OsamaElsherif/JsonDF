@@ -45,6 +45,18 @@ print(json.keys)
 print(json.keys.another_key)
 ```
 
+you can add values inside the Json as you want,
+use the insert method
+
+```python
+json.insert(name='name', value='value')
+```
+
+keep in mind that you add in the base level,
+which mean that if you have two Jsons inside each other, and you want to add in the secod Json,
+you need to access it first to add in it.
+I'll try to fix this problem later.
+
 feel free to contribute in this project.
 
 cheers.

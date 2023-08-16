@@ -122,6 +122,41 @@ json.find_all('key')
 #  if you specified the reports param in find_all() to be False it will output the finds only
 ```
 
+## Searialization and Deserialization of objects in Json
+
+you can now serialize objects to Json using the Searializer object, which takes the object as a paramater and gives
+you a Json for it, for now it doesn't work with instances of the object yet.
+
+*NOTE* : you have to have the inspect package installed to work with it.
+### Searializing 
+
+to start with searilaization you have to import the searialzer object
+```python
+from JsonDF.utils.Json.Searializer.Searializer import Searializer
+```
+
+working example with the searializer object
+
+```python
+from JsonDF.utils.Json.Searializer.Searializer import Searializer
+
+class Test:
+  def __init__(self, param1, param2):
+    self.param1 = param1
+    self.param2 = param2
+  
+  def another_method(self, param1):
+    x = param1 + self.param2
+
+print(Searializer(Test).Serialize())
+
+#   outputs :
+# {'name': 'Test', 'params': {}, 'methods': {'Test.__init__': {'Test.__init__': {'params': (['self', 'param1', 'param2'], 
+# None), 'code': '    def __init__(self, param1, param2):\n        self.param1 = param1\n        self.param2 = param2\n'}}, 
+# 'Test.another_method': {'Test.another_method': {'params': (['self', 'param1'], None), 'code': '    def another_method
+# (self, param1):\n        x = param1 + self.param2\n'}}}}
+```
+
 feel free to contribute in this project.
 
 cheers.

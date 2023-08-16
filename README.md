@@ -124,6 +124,12 @@ json.find_all('key')
 
 ## Searialization and Deserialization of objects in Json
 
+to use it :
+
+`pip install JsonDF==1.2.0b1.post1`
+
+*NOTE* : this is only avialble in the pre-release of the version `1.2.0b1.post1`
+
 you can now serialize objects to Json using the Searializer object, which takes the object as a paramater and gives
 you a Json for it, for now it doesn't work with instances of the object yet.
 

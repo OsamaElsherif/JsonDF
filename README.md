@@ -91,10 +91,36 @@ print(json')
 
 #  output :
 #  {'key': ''}
-#  empty because the 'key' key and it's values is deleted
 ```
 the type of the value is determined with the same type that it was with in the Json Object, to change it you've to update it
 with the `insert()` method after the `objectify()` other wise it will still with the same type.
+
+### searching in the Json
+
+you can search in the Json using the `find()` and `find_all()` methods, which gives you the ability to find values based on
+the keys inside the Json.
+
+```python
+json = Json(name='json_name', json={'key': 'value'})
+result = json.find('key')
+print(result)
+
+#  output :
+#  value
+#  if you specified the reports param in find() to be True it will output
+#  ('value', True)
+#  the second True is for the success of the find method
+```
+
+```python
+json = Json(name='json_name', json={'key': {'key': 'value'})
+json.find_all('key')
+
+#  output :
+#  {(0, 'key', 'key'), {'key': 'value'}}
+#  {(1, 'key', 'key'), 'value'}
+#  if you specified the reports param in find_all() to be False it will output the finds only
+```
 
 feel free to contribute in this project.
 

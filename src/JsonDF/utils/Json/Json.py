@@ -37,17 +37,17 @@ class Json:
             self.__setattr__(name, 0)
         return self
     
-    def find(self, name):
+    def find(self, name, report=False):
         try:
             value = self.__getattribute__(name)
-            return (value, True)
+            return (value, True) if report else value
         except:
-            return ((self.__depth__, f"No results for {name} in {self.json_name} at depth {self.__depth__}"), False)
+            return ((self.__depth__, f"No results for {name} in {self.json_name} at depth {self.__depth__}"), False) if report else f"No results for {name} in {self.json_name} at depth {self.__depth__}"
     def find_all(self, name, reports=True):
         query = {}
-        result = self.find(name)
+        result = self.find(name, True)
         if result[1]:
-            query[(self.__depth__, name, self.json_name)] = self.find(name)[0]
+            query[(self.__depth__, name, self.json_name)] = self.find(name, True)[0]
             print(query)
         else:
             if reports: print(result[0][1])

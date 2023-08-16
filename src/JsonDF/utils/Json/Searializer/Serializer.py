@@ -1,4 +1,4 @@
-import JsonDF.utils.Json.Json as Json
+from ..Json import Json
 import inspect
 
 class Serializer:

@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "JsonDF"
-version = "1.1.0"
+version = "1.1.1"
 authors = [
   { name="Osama Elsherif", email="elsherif.osama155@gmail.com" },
 ]
-description = "A project for reading JSON data and parse it for DF"
+description = "A project for reading JSON data and parse it for DF, with ability to make you edits to Json, insert values, delete values, update values and search for any values."
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [

@@ -43,6 +43,7 @@ class Json:
             return (value, True) if report else value
         except:
             return ((self.__depth__, f"No results for {name} in {self.json_name} at depth {self.__depth__}"), False) if report else f"No results for {name} in {self.json_name} at depth {self.__depth__}"
+    
     def find_all(self, name, reports=True):
         query = {}
         result = self.find(name, True)
@@ -55,7 +56,8 @@ class Json:
         if self.depth_check(self):
             for depth_point in self.__depth_in__:
                 if type(self.__getattribute__(depth_point)) == list:
-                    self.__getattribute__(depth_point)[0].find_all(name, reports)
+                    for element in self.__getattribute__(depth_point):
+                        element.find_all(name, reports)
                 else:
                     self.__getattribute__(depth_point).find_all(name, reports)
         
@@ -69,21 +71,23 @@ class Json:
     def __value(self, value, key):
         if type(value) == dict or type(value) == list:
             if type(value) == list:
-                return [self.process(value, key)]
+                return self.process(value, key)
             else:
                 self.__total_depth__ += 1
                 self.__depth_in__.append(key)
-                return Json(key, value, self.__depth__+1).objectiy()
+                return Json(f"{self.json_name}.{key}", value, self.__depth__+1).objectiy()
         else:
             return value
 
     def process(self, value, key):
+        __list = []
         if value == None: return []
         for val in value:
             if type(val) == dict:
                 self.__total_depth__ += 1
-                self.__depth_in__.append(key)
-                return Json(key, val, self.__depth__+1).objectiy()
+                if self.__depth_in__.count(key) < 1: self.__depth_in__.append(key)
+                __list.append(Json(f"{self.json_name}.{key}", val, self.__depth__+1).objectiy())
+        return __list
     
     def show(self):
         attrs = {}

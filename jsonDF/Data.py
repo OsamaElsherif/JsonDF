@@ -1,5 +1,5 @@
-import JsonDF.utils.Dict.Dict as d
-import JsonDF.utils.List.List as l
+import jsonDF.utils.Dict.Dict as d
+import jsonDF.utils.List.List as l
 
 class Data:
     def __init__(self, prefix='root', data=dict()) -> None:

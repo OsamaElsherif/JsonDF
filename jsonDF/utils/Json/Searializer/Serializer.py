@@ -1,5 +1,9 @@
 from ..Json import Json
 import inspect
+# for compression
+import gzip
+import base64
+import ast
 
 class Serializer:
     def __init__(self, object:object):
@@ -37,4 +41,13 @@ class Serializer:
     def Serialize(self):
         return Json(self.get_name(), {'name': self.get_name(),
                                       'params': self.get_object_params(),
-                                      'methods': self.get_methods()}).objectiy()
+                                      'methods': self.get_methods()})
+    
+    def save(self):
+        obj = self.Serialize().objectiy().__repr__().encode()
+        obj = base64.b64encode(obj)
+        open(f"{self.get_name()}.jdf", "wb").write(gzip.compress(obj))
+        return f"{self.get_name()}.jdf"
+
+    def __repr__(self):
+        return self.Serialize().objectiy().__repr__()

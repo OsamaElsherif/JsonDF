@@ -1,15 +1,23 @@
-import JsonDF.utils.List.List as l
+import jsonDF.utils.Dict.Dict as d
 
-class Dict:
-    def __init__ (self, data, prefix):
+class List:
+    def __init__(self, prefix, data):
         self.data = data
         self.prefix = prefix
         self.rows = {}
         self.childs = self.process()
+
     
     def process(self):
-        if len(self.data.keys()) >= 1:
-            return self.childs(list(self.data.keys()))
+        if len(self.data) > 1:
+            self.data = self.data[0]
+            self.childs(self.data)
+        elif len(self.data) == 1:
+            if type(self.data[0]) == dict:
+                self.data = self.data[0]
+                return self.childs(list(self.data.keys()))
+            else:
+                return self.data[0]
     
     def childs(self, keys):
         for key in keys:
@@ -17,9 +25,9 @@ class Dict:
                 self.rows[f"{self.prefix}_{key}"] = self.childType(data=self.data[key], prefix=f"{self.prefix}_{key}")
             else:
                 self.rows[f"{self.prefix}_{key}"] = self.data[key]
-
+    
     def childType(self, data, prefix):
         if type(data) == list:
-            return l.List(data=data, prefix=prefix).rows
+            return List(data=data, prefix=prefix).rows
         elif type(data) == dict:
-            return Dict(data=data, prefix=prefix).rows
+            return d.Dict(data=data, prefix=prefix).rows

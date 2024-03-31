@@ -134,14 +134,14 @@ class Json:
 				else f"No results for {name} in {self.json_name} at depth {self.__depth__}"
 			)
 
-	def find_all(self, name, reports=True, query={}):
+	def find_all(self, name, reports=True, query=[]):
 		"""
 		Recursively searches for all occurrences of a key within the Json object and its nested structures.
 
 		Args:
 			name (str): The name of the key to find.
 			reports (bool, optional): If True, prints messages for unsuccessful searches. Defaults to True.
-			query (dict, optional): A dictionary to store found attributes and their values. Defaults to {}.
+			query (list, optional): A dictionary to store found attributes and their values. Defaults to {}.
 
 		Returns:
 			tuple: A tuple containing the updated query dictionary and a success flag.
@@ -150,7 +150,7 @@ class Json:
 		query = query
 		result = self.find(name, True)
 		if result[1]:
-			query[(self.__depth__, name, self.json_name)] = self.find(name, True)[0]
+			query.append({(self.__depth__, name, self.json_name): self.find(name, True)[0]})
 		else:
 			if reports:
 				print(result[0][1])

@@ -1,6 +1,5 @@
-import FiJson.utils.Dict.Dict as d
-import FiJson.utils.List.List as l
-
+from FiJson import List as l
+from FiJson import Dict as d
 
 class Data:
     def __init__(self, prefix="root", data=dict()) -> None:

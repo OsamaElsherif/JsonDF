@@ -104,6 +104,9 @@ class Json:
                 __list.append(
                     Json(f"{self.json_name}.{key}", val, self.__depth__ + 1).objectiy()
                 )
+                continue
+
+            __list.append(val)
         return __list
 
     def show(self):

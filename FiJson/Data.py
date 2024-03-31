@@ -1,5 +1,5 @@
-import jsonDF.utils.Dict.Dict as d
-import jsonDF.utils.List.List as l
+import FiJson.utils.Dict.Dict as d
+import FiJson.utils.List.List as l
 
 
 class Data:

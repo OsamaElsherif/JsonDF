@@ -54,12 +54,11 @@ class Json:
                 else f"No results for {name} in {self.json_name} at depth {self.__depth__}"
             )
 
-    def find_all(self, name, reports=True):
-        query = {}
+    def find_all(self, name, reports=True, query={}):
+        query = query
         result = self.find(name, True)
         if result[1]:
             query[(self.__depth__, name, self.json_name)] = self.find(name, True)[0]
-            print(query)
         else:
             if reports:
                 print(result[0][1])
@@ -68,11 +67,11 @@ class Json:
             for depth_point in self.__depth_in__:
                 if type(self.__getattribute__(depth_point)) == list:
                     for element in self.__getattribute__(depth_point):
-                        element.find_all(name, reports)
+                        element.find_all(name, reports, query)
                 else:
-                    self.__getattribute__(depth_point).find_all(name, reports)
+                    self.__getattribute__(depth_point).find_all(name, reports, query)
 
-        return query
+        return (query, True)
 
     def depth_check(self, json: object):
         if json.__total_depth__ > 0:

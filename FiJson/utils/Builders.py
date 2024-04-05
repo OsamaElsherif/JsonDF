@@ -49,24 +49,26 @@ class SelectQueryBuilder(QueryBuilder):
         """
         Sets the WHERE clause for the query and returns the builder object.
         """
-        self.where_clause = f" WHERE {where_clause}"
+        self.where_clause = f" WHERE ( {where_clause} )"
         return self
 
-    def build(self) -> str:
+    def build(self) -> QueryBuilder:
         """
         Builds the final SELECT query string.
         """
         super().build()
         self.query_parts.append(self.SELECT_CLAUSE)
         if self._columns:
-            self.query_parts.append(", ".join(self._columns))
+            self.query_parts.append("(")
+            self.query_parts.append(" , ".join(self._columns))
+            self.query_parts.append(")")
         else:
             self.query_parts.append("*")
         self.query_parts.append(self.FROM_CLAUSE)
         self.query_parts.append(self.table_name)
         if self.where_clause:
             self.query_parts.append(self.where_clause)
-        return str(self)
+        return self
 
 
 class InsertQueryBuilder(QueryBuilder):
@@ -116,7 +118,7 @@ class InsertQueryBuilder(QueryBuilder):
         quoted_values = [f"'{val}'" for val in self._values]
         self.query_parts.append(", ".join(quoted_values))
         self.query_parts.append(")")
-        return str(self)
+        return self
 
 class DeleteQueryBuilder(QueryBuilder):
     """
@@ -153,4 +155,4 @@ class DeleteQueryBuilder(QueryBuilder):
         self.query_parts.append(self.table_name)
         if self.where_clause:
             self.query_parts.append(self.where_clause)
-        return str(self)
+        return self
